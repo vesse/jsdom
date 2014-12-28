@@ -191,23 +191,6 @@ exports.tests = {
     test.done();
   },
 
-  // TODO: break into two tests
-  apply_jsdom_features_at_build_time: function(test) {
-    var dom = jsdom.jsdom().parentWindow;
-
-    var doc = new (dom.Document)(),
-        doc2 = new (dom.Document)(),
-        defaults = jsdom.defaultDocumentFeatures;
-    jsdom.applyDocumentFeatures(doc);
-    for (var i=0; i<defaults.length; i++) {
-      test.ok(doc.implementation._hasFeature(defaults[i]), 'Document has all of the default features');
-    }
-    jsdom.applyDocumentFeatures(doc2, {'FetchExternalResources': false});
-    test.ok(doc2.implementation._hasFeature('ProcessExternalResources'), 'Document has ProcessExternalResources');
-    test.equal(doc2.implementation._hasFeature('FetchExternalResources'), false, 'Document does not have \'FetchExternalResources\'');
-    test.done();
-  },
-
   ensure_scripts_can_be_disabled_via_options_features: function(test) {
     var html = '<html><head><script src="./files/hello.js"></script></head>' +
                '<body><span id="test">hello from html</span></body></html>';

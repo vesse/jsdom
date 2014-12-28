@@ -1,3 +1,4 @@
+var jsdom = require('../..');
 var staff = require('./core/files/staff.xml');
 var hc_staff = require('./core/files/hc_staff.xml');
 var hc_nodtdstaff = require('./core/files/hc_nodtdstaff.xml');
@@ -17016,8 +17017,7 @@ exports.tests = {
   },
 
   onevent_properties_are_set_on_setAttribute: function(test) {
-    var dom = require("../../lib/jsdom/living");
-    var doc = new dom.Document('');
+    var doc = jsdom.jsdom();
     var elem = doc.createElement('test');
     elem.setAttribute('onclick', 'test');
     test.ok(elem.onclick, 'elem.onclick is set');
@@ -17025,8 +17025,7 @@ exports.tests = {
   },
 
   onevent_properties_are_set_on_setAttributeNode: function(test) {
-    var dom = require("../../lib/jsdom/living");
-    var doc = new dom.Document('');
+    var doc = jsdom.jsdom();
     var elem = doc.createElement('test');
     var attr = doc.createAttribute('onclick');
 
@@ -17037,8 +17036,7 @@ exports.tests = {
   },
 
   onevent_properties_are_set_on_attr_set_value: function(test) {
-    var dom = require("../../lib/jsdom/living");
-    var doc = new dom.Document('');
+    var doc = jsdom.jsdom();
     var elem = doc.createElement('test');
     var attr = doc.createAttribute('onclick');
 
@@ -17069,8 +17067,7 @@ exports.tests = {
   },
 
   restrict_text_data_type: function(test) {
-    var dom = require("../../lib/jsdom/living");
-    var doc = new dom.Document('');
+    var doc = jsdom.jsdom();
     var testObj = {
       valueOf: function () { return 34; },
       toString: function () { return 'str' }

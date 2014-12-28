@@ -5,11 +5,9 @@ var toPathname = require("../util").toPathname(__dirname);
 var toFileUrl = require("../util").toFileUrl(__dirname);
 var load = require("../util").load(__dirname +  "/html/");
 
-var html = require("../../lib/jsdom/living");
-var getImplementation = function() {
-  var doc = new html.HTMLDocument();
-  return doc.implementation;
-};
+function getImplementation() {
+  return jsdom.jsdom().implementation;
+}
 
 exports.tests = {
   /**

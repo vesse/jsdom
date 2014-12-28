@@ -3,7 +3,7 @@ var dom = require("../../../../lib/jsdom/living");
 // Our XML parser is not namespace aware so we can't just parse the string
 
 exports.staffNS = function() {
-  var bootstrapDoc = new dom.Document("staff");
+  var bootstrapDoc = new dom.Document({ parsingMode: "xml" });
   var doctype = bootstrapDoc.implementation.createDocumentType("staff", "STAFF", "staffNS.dtd");
   var doc = bootstrapDoc.implementation.createDocument(null, "staff", doctype);
   var staff = doc.documentElement;
