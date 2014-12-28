@@ -1388,6 +1388,14 @@ exports.tests = {
     test.done();
   },
 
+  iframe_contents: function (test) {
+    var document = jsdom.jsdom("<iframe></iframe>");
+    var iframeDocument = document.querySelector("iframe").contentWindow.document;
+
+    test.equal(serializeDocument(iframeDocument), "<html><head></head><body></body></html>");
+    test.done();
+  },
+
   jquery_val_on_selects : function(test) {
     var window = jsdom.jsdom().parentWindow;
 
