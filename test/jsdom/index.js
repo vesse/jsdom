@@ -1393,6 +1393,9 @@ exports.tests = {
     var iframeDocument = document.querySelector("iframe").contentWindow.document;
 
     test.equal(serializeDocument(iframeDocument), "<html><head></head><body></body></html>");
+    test.ok(iframeDocument.documentElement);
+    test.ok(iframeDocument.head);
+    test.ok(iframeDocument.body);
     test.done();
   },
 
