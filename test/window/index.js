@@ -1,10 +1,10 @@
 var serializeDocument = require('../../lib/jsdom').serializeDocument;
-var dom = require("../../lib/jsdom/living");
+var jsdom = require("../..");
 
 exports.tests = {
 
   addmetatohead: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     var meta = window.document.createElement("meta");
     window.document.getElementsByTagName("head").item(0).appendChild(meta);
     var elements = window.document.getElementsByTagName("head").item(0).childNodes;
@@ -15,7 +15,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_has_a_window_location_href: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     var rurl = /^([\w\+\.\-]+:)\/\/([^\/?#:]*)(?::(\d+))?/,
         urlParts = rurl.exec(window.location.href);
     test.ok(urlParts.length > 1, 'url shouldnt be blank');
@@ -23,7 +23,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_has_a_window_location_hash: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     var defaultHref = window.location.href;
     test.equals(window.location.hash, "");
     window.location.href = window.location.href + "#foobar";
@@ -35,7 +35,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_has_a_window_location_search: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     var defaultSearch = window.location.search;
     test.equals(window.location.search, "");
     window.location.search = window.location.search + "?foo=bar";
@@ -47,7 +47,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_can_set_search_with_a_hash: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     window.location.href = window.location.href + "#foo";
     window.location.search = "?foo=bar";
     test.equals(window.location.href.split("?")[1], "foo=bar#foo");
@@ -57,7 +57,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_fires_hashchange_by_changing_href: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     var eventfired = false;
     window.addEventListener("hashchange", function() { eventfired = true; });
     window.location.href = window.location.href + "#foo";
@@ -68,7 +68,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_fires_hashchange_by_changing_hash: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     var eventfired = false;
     window.addEventListener("hashchange", function() { eventfired = true; });
     window.location.hash = "#foo";
@@ -79,7 +79,7 @@ exports.tests = {
   },
 
   ensure_a_default_window_has_a_defined_port: function(test) {
-    var window = require("../../lib/jsdom/browser/index").windowAugmentation(dom);
+    var window = jsdom.jsdom().parentWindow;
     test.equals(window.location.port, "");
     test.done();
   }

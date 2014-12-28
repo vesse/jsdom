@@ -200,11 +200,11 @@ exports.tests = {
         defaults = jsdom.defaultDocumentFeatures;
     jsdom.applyDocumentFeatures(doc);
     for (var i=0; i<defaults.length; i++) {
-      test.ok(doc.implementation.hasFeature(defaults[i]), 'Document has all of the default features');
+      test.ok(doc.implementation._hasFeature(defaults[i]), 'Document has all of the default features');
     }
     jsdom.applyDocumentFeatures(doc2, {'FetchExternalResources': false});
-    test.ok(doc2.implementation.hasFeature('ProcessExternalResources'), 'Document has ProcessExternalResources');
-    test.equal(doc2.implementation.hasFeature('FetchExternalResources'), false, 'Document does not have \'FetchExternalResources\'');
+    test.ok(doc2.implementation._hasFeature('ProcessExternalResources'), 'Document has ProcessExternalResources');
+    test.equal(doc2.implementation._hasFeature('FetchExternalResources'), false, 'Document does not have \'FetchExternalResources\'');
     test.done();
   },
 
@@ -658,7 +658,7 @@ exports.tests = {
 
   mutation_events : function(test) {
     var document = jsdom.jsdom();
-    document.implementation.addFeature('MutationEvents', '2.0');
+    document.implementation._addFeature('MutationEvents', '2.0');
     var created = '';
     var removed = '';
     document.addEventListener('DOMNodeInserted', function(ev) {
